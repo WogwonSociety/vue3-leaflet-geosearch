@@ -1,25 +1,36 @@
 {
-  "name": "vue2-leaflet-geosearch",
-  "version": "1.0.7",
-  "description": "GeoSearch plugin extension for vue2-leaflet package",
-  "main": "Vue2LeafletGeosearch.vue",
+  "name": "vue3-leaflet-geosearch",
+  "version": "1.0.0",
+  "description": "GeoSearch plugin extension for vue3-leaflet package, extended from vue2-leaflet-geosearch by github.com/@fega",
+  "main": "Vue3LeafletGeosearch.vue",
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-leaflet-geosearch.esm.js",
+      "require": "./dist/vue3-leaflet-geosearch.iife.js"
+    }
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fega/vue2-leaflet-geosearch.git"
+    "url": "https://github.com/WogwonSociety/vue3-leaflet-geosearch.git"
   },
   "keywords": [
-    "vue2",
+    "vue3",
     "leaflet",
     "GeoSearch"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fega/vue2-leaflet-geosearch/issues"
+    "url": "https://github.com/WogwonSociety/vue3-leaflet-geosearch.git"
   },
-  "homepage": "https://github.com/fega/vue2-leaflet-geosearch#readme",
+  "homepage": "https://github.com/WogwonSociety/vue3-leaflet-geosearch#readme",
   "dependencies": {
-    "leaflet-geosearch": "^3.1.0",
-    "vue2-leaflet": "^0.0.55"
+    "@vue-leaflet/vue-leaflet": "^0.10.1",
+    "leaflet": "^1.9.4",
+    "leaflet-geosearch": "^4.0.0",
+    "vue": "^3.5.12"
   },
-  "author": "Fabian Gutierrez <fega.hg@gmail.com> (fabiangutierrez.co)"
+  "author": "Islati @ Wogwon Society <islati@wogwon.com>",
+  "devDependencies": {
+    "@types/leaflet": "^1.9.12"
+  }
 }
