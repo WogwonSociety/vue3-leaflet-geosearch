@@ -1,8 +1,8 @@
 {
-  "name": "vue3-leaflet-geosearch",
+  "name": "@wogwon/vue3-leaflet-geosearch",
   "version": "1.0.0",
   "description": "GeoSearch plugin extension for vue3-leaflet package, extended from vue2-leaflet-geosearch by github.com/@fega",
-  "main": "Vue3LeafletGeosearch.vue",
+  "main": "src/LeafletGeosearch.vue",
   "exports": {
     ".": {
       "import": "./dist/vue3-leaflet-geosearch.esm.js",
