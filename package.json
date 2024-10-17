@@ -1,13 +1,25 @@
 {
-  "name": "@wogwon/vue3-leaflet-geosearch",
+  "name": "@wogwonsociety/vue3-leaflet-geosearch",
   "version": "1.0.0",
-  "description": "GeoSearch plugin extension for vue3-leaflet package, extended from vue2-leaflet-geosearch by github.com/@fega",
-  "main": "src/LeafletGeosearch.vue",
+  "description": "GeoSearch plugin extension for Vue 3 and Leaflet. Makes maps easy 🌍",
+  "main": "./dist/index.iife.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/vue3-leaflet-geosearch.esm.js",
-      "require": "./dist/vue3-leaflet-geosearch.iife.js"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.iife.js",
+      "types": "./dist/index.d.ts"
     }
+  },
+  "files": [
+    "dist",
+    "src/LeafletGeosearch.vue"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -16,21 +28,31 @@
   "keywords": [
     "vue3",
     "leaflet",
-    "GeoSearch"
+    "GeoSearch",
+    "maps",
+    "search",
+    "vue",
+    "vue-leaflet"
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WogwonSociety/vue3-leaflet-geosearch.git"
+    "url": "https://github.com/WogwonSociety/vue3-leaflet-geosearch/issues"
   },
   "homepage": "https://github.com/WogwonSociety/vue3-leaflet-geosearch#readme",
   "dependencies": {
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^4.0.0",
+    "vite-plugin-dts": "^4.2.4",
     "vue": "^3.5.12"
   },
-  "author": "Islati @ Wogwon Society <islati@wogwon.com>",
+  "author": "Wogwon Society <info@wogwon.com>",
   "devDependencies": {
-    "@types/leaflet": "^1.9.12"
+    "@types/leaflet": "^1.9.12",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "typescritp": "^1.0.0",
+    "vite": "^5.4.9",
+    "vue-tsc": "^2.1.6"
   }
 }

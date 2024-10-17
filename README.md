@@ -1,68 +1,57 @@
+# 🌍 Vue3-Leaflet-Geosearch 📍
 
-# Vue3 Leaflet GeoSearch
+Welcome to **[Wogwon Societies](https://www.wogwon.com)** GeoSearch plugin! This plugin extends Leaflet with Vue 3 compatibility, making maps +
+geosearch easy. Let's gooo! 🚀
 
-This plugin extends the functionality of **vue-leaflet** for Vue 3 by adding a **GeoSearchControl** to your Leaflet maps using `leaflet-geosearch`.
+## ⚡️ Features
 
----
+- GeoSearch with Leaflet and Vue 3 🌍
+- Lightweight and simple to use
+- Perfect for maps and search-driven apps
 
-## Installation
-
-Dependencies:
-- ` @vue-leaflet/vue-leaflet`
-- `leaflet`
-- `leaflet-geosearch`
-- `vite` (Development)
+## 📦 Installation
 
 ```bash
-bun add @wogwon/vue3-leaflet-geosearch
+npm install @wogwonsociety/vue3-leaflet-geosearch
 ```
----
 
-## Usage
 
-Below is an example of how to integrate this plugin inside a Leaflet map using Vue 3's `<l-map>` component.
-
-### Example
+## 🎯 Usage
 
 ```vue
-<template>
-  <div style="height: 600px; width: 800px">
-    <l-map ref="map" v-model:zoom="zoom" :center="[47.41322, -1.219482]">
-      <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        layer-type="base"
-        name="OpenStreetMap"
-      />
-      <LeafletGeosearch /> <!-- Add the GeoSearchControl component here -->
-    </l-map>
-  </div>
-</template>
+import { defineComponent } from 'vue';
+import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet';
+import GeoSearch from '@wogwonsociety/vue3-leaflet-geosearch';
 
-<script lang="ts" setup>
-import { ref, provide } from 'vue';
-import { LMap, LTileLayer } from '@vue-leaflet/vue-leaflet';
-import GeoSearchControl from '@wogwon/vue3-leaflet-geosearch'; // Import your GeoSearchControl component
-
-// Reactive zoom state
-const zoom = ref(2);
-
-// Provide map reference to GeoSearchControl
-const map = ref(null);
-</script>
-
-<style scoped>
-/* Optional styling */
-.leaflet-container {
-  height: 100%;
-  width: 100%;
-}
-</style>
+export default defineComponent({
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker,
+    GeoSearch
+  },
+  setup() {
+    const center = [51.505, -0.09];
+    return { center };
+  }
+});
 ```
 
----
+In your template:
+```vue
+<l-map :zoom="13" :center="center">
+  <l-tile-layer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+  <geo-search></geo-search>
+</l-map>
+```
 
-## Conclusion
+## 🔧 Configuration
+This plugin is zero-config by default but extendable to your heart's content.
 
-With this setup, you now have a working **GeoSearchControl** integrated into your Vue 3 Leaflet map. Ensure that the map reference is properly provided and injected into the child component for the GeoSearch control to work.
+## 👏 Credits
+This project is an extension of the awesome vue2-leaflet-geosearch by @fega. Huge thanks for laying the groundwork! 🙌
 
-If you encounter any issues, refer to the [leaflet-geosearch documentation](https://github.com/smeijer/leaflet-geosearch) or the [vue-leaflet documentation](https://vue-leaflet.github.io/vue-leaflet/).
+
+## 🎉 Join Wogwon Society
+We're building software we love. Feel free to fork, suggest ideas, or contribute! Wogwon Society GitHub 💻
+
