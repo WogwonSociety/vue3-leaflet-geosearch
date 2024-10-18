@@ -1,7 +1,8 @@
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import dts from 'vite-plugin-dts';
-import {terser} from 'rollup-plugin-terser';
+import { terser } from 'rollup-plugin-terser';
+import { fileURLToPath, URL } from 'node:url';  // Import these from Node's native url module
 
 // Plugin to remove any CSS files from the output
 function removeCss() {
@@ -33,6 +34,11 @@ export default defineConfig({
         }),
         removeCss()
     ],
+    resolve: {
+        alias: {
+            '@': fileURLToPath(new URL('./src', import.meta.url)) // Correct path resolution using Node.js URL
+        }
+    },
     build: {
         emptyOutDir: true,
         cssCodeSplit: false,
@@ -55,7 +61,7 @@ export default defineConfig({
                     }
                 })
             ],
-            external: ['vue', 'leaflet-geosearch', 'vue-leaflet', 'leaflet'],
+            external: ['vue', 'leaflet', '@vue-leaflet/vue-leaflet', 'leaflet-geosearch'],
             output: {
                 globals: {
                     vue: 'Vue',

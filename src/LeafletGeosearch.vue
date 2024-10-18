@@ -1,56 +1,53 @@
-<script lang="ts" setup>
-import {onMounted, onBeforeUnmount, inject} from 'vue';
-import {GeoSearchControl, OpenStreetMapProvider} from 'leaflet-geosearch';
-import 'leaflet/dist/leaflet.css';
-import 'leaflet-geosearch/dist/geosearch.css';
-import {Map} from 'leaflet';
+<template>
+  <!-- No template needed as this component interacts directly with the Leaflet map -->
+</template>
 
-// Inject the map instance from the parent <l-map>
-const map: Map | undefined = inject<Map | undefined>('leafletRef');
+<script lang="ts">
+import {defineComponent, inject, onMounted, onBeforeUnmount} from 'vue';
+import {type Map} from 'leaflet';
+import {OpenStreetMapProvider, GeoSearchControl} from 'leaflet-geosearch';
 
-// Ensure the map instance is injected properly
-if (!map) {
-  throw new Error('Leaflet map instance not found. Make sure this component is used inside map component.');
-}
+export default defineComponent({
+  name: 'LeafletGeosearch',
+  setup() {
+    // Inject the Leaflet map instance
+    const leafletRef = inject<Map>('leafletRef');
+    if (!leafletRef) {
+      throw new Error('Leaflet map instance not found. Make sure this component is used inside a map component.');
+    }
 
-// GeoSearch provider and control options
-const provider = new OpenStreetMapProvider();
-const searchControl = GeoSearchControl({
-  provider,
-  style: 'bar',
-  showMarker: true,
-  retainZoomLevel: false,
-  autoClose: true,
-  searchLabel: 'Enter address',
-});
+    // Create a new provider for OpenStreetMap
+    const provider = new OpenStreetMapProvider();
 
-// Mount the control on the map when the component is ready
-onMounted(() => {
-  if (!map) {
-    console.error('Leaflet map instance not found. Make sure this component is used inside map component.');
-    return;
+    // Create a new GeoSearch control with the defined options
+    const searchControl = GeoSearchControl({
+      provider,
+      style: 'bar',
+      showMarker: true,
+      retainZoomLevel: false,
+      autoClose: true,
+      searchLabel: 'Enter address'
+    });
+
+    // Add control to the map when the component is mounted
+    onMounted(() => {
+      if (leafletRef) {
+        leafletRef.addControl(searchControl);
+      }
+
+      // Prevent propagation of click events inside the search control container
+      const container = searchControl.getContainer();
+      if (container) {
+        container.onclick = (event: MouseEvent) => {
+          event.stopPropagation();
+        };
+      }
+    });
+
+    // Remove control from the map when the component is unmounted
+    onBeforeUnmount(() => {
+      leafletRef.removeControl(searchControl);
+    });
   }
-  map.addControl(searchControl);
-
-  let searchControlContainer = searchControl.getContainer();
-
-  if (!searchControlContainer) {
-    console.error('Search control container not found');
-    return;
-  }
-
-  searchControlContainer.onclick = e => {
-    e.stopPropagation();
-  };
-});
-
-// Remove the control from the map before the component is destroyed
-onBeforeUnmount(() => {
-  map.removeControl(searchControl);
 });
 </script>
-
-<template>
-  <!-- No internal map, just integrates as a child -->
-  <div/>
-</template>
